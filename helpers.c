@@ -1,42 +1,16 @@
-/**
- * helpers.c
- *
- * Helper functions for Problem Set 3.
- */
+/* Helper functions for Problem Set 3.*/
  
 #include <cs50.h>
 
 #include "helpers.h"
-void bubble_sort(int values[], int n);
-bool b_search(int value, int values[], int n);
-/**
- * Returns true if value is in array of n values, else false.
- */
-bool search(int value, int values[], int n)
-{
-    // calls binary search only when #elements > 0
-    if (value < 0)
-    {
-        return false;
-    }
-    else
-        return b_search(value, values, n);
-}
-
-// calls sorting function
-void sort(int values[], int n)
-{
-    bubble_sort(values, n);
-    return;
-}
 
 // binary search function
 bool b_search(int value, int values[], int n)
 {
-    
     int end = n - 1;
     int begg = 0;
 
+    // ensures beginning point is less than end point
     while (end >= begg)
     {
         int mid = (begg + end) / 2;
@@ -44,10 +18,12 @@ bool b_search(int value, int values[], int n)
         {
             return true;
         }
+        // shifts end point if mid value > value
         else if (values[mid] > value)
         {
             end = mid - 1;
         }
+        // shifts beginning point if mid value < value
         else
         {
             begg = mid + 1;
@@ -81,3 +57,23 @@ void bubble_sort(int values[], int n)
         continue;
     }
 }
+/* Returns true if value is in array of n values, else false. */
+bool search(int value, int values[], int n)
+{
+    // calls binary search only when #elements > 0
+    if (value < 0)
+    {
+        return false;
+    }
+    // returns true if found else returns false
+    else
+        return b_search(value, values, n);
+}
+
+// calls sorting function
+void sort(int values[], int n)
+{
+    bubble_sort(values, n);
+    return;
+}
+
