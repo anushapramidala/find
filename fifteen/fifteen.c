@@ -160,7 +160,7 @@ void init(int d)
     for(int i = 0; i < d; i++)
     {
         for(int j = 0; j < d; j++)
-        board[i][j] = --p;
+            board[i][j] = (--p);
     }
     if (d % 2 == 0)
     {
@@ -179,9 +179,9 @@ void draw(int d)
         for(int l = 0; l < d; l++)
         {
             if (board[k][l] == 0)
-            printf (" _ ");
+                printf (" _ ");
             else 
-            printf("%2i ", board[k][l]);
+                printf("%2i ", board[k][l]);
         }
         printf("\n");
     }
@@ -209,12 +209,14 @@ bool move(int tile)
             if (board[k][l] == tile)
             {
                 ti = k, tj = l;
-                if (((ti == bi + 1) && (tj == bj)) || ((tj == bi - 1) && (tj == bj))
-                    || ((ti == bi) && (tj == bj + 1)) || ((ti == bi) && (tj == bj - 1)))
+                if (((ti == bi + 1) && (tj == bj)) || 
+                    ((ti == bi - 1) && (tj == bj)) || 
+                    ((ti == bi) && (tj == bj + 1)) || 
+                    ((ti == bi) && (tj == bj - 1)))
                 {
-                     board[ti][tj] = 0;
-                     board[bi][bj] = tile;
-                     return true;
+                    board[ti][tj] = 0;
+                    board[bi][bj] = tile;
+                    return true;
                 }
             }
         }
@@ -228,6 +230,16 @@ bool move(int tile)
  */
 bool won(void)
 {
-    // TODO
-    return false;
+    for (int i = 0; i < d; i++)
+    {
+        for (int j = 0; j < d; j++)
+        {
+            if (board[i][j] < board[i + 1][j + 1])
+                continue;
+            else
+                return false;
+        }
+    }
+    
+    return true;
 }
