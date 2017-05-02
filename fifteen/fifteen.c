@@ -156,7 +156,7 @@ void greet(void)
  */
 void init(int d)
 {
-    int p = d*d;
+    int p = d * d;
     for(int i = 0; i < d; i++)
     {
         for(int j = 0; j < d; j++)
@@ -179,7 +179,7 @@ void draw(int d)
         for(int l = 0; l < d; l++)
         {
             if (board[k][l] == 0)
-            printf (" _");
+            printf (" _ ");
             else 
             printf("%2i ", board[k][l]);
         }
@@ -193,7 +193,32 @@ void draw(int d)
  */
 bool move(int tile)
 {
-    // TODO
+    int bi, bj, ti, tj;
+    for(int i = 0; i < d; i++)
+    {
+        for(int j = 0; j < d; j++)
+        {
+            if (board[i][j] == 0)
+                bi = i, bj = j;
+        }
+    }
+    for(int k = 0; k < d; k++)
+    {
+        for(int l = 0; l < d; l++)
+        {
+            if (board[k][l] == tile)
+            {
+                ti = k, tj = l;
+                if (((ti == bi + 1) && (tj == bj)) || ((tj == bi - 1) && (tj == bj))
+                    || ((ti == bi) && (tj == bj + 1)) || ((ti == bi) && (tj == bj - 1)))
+                {
+                     board[ti][tj] = 0;
+                     board[bi][bj] = tile;
+                     return true;
+                }
+            }
+        }
+    }
     return false;
 }
 
